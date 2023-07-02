@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "nuxt-vuetify-nested-containment-playground",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate"
+  },
+  "dependencies": {
+    "vuetify": "3.3.6"
+  },
+  "devDependencies": {
+    "nuxt": "latest",
+    "@mdi/font": "^7.2.96"
+  }
+}
