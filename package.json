@@ -2,7 +2,20 @@
   "name": "nuxt-vuetify-nested-containment",
   "version": "1.0.0",
   "description": "This module provides multiple vuetify extended components like a List with nested logic",
-  "repository": "your-org/nuxt-vuetify-nested-containment",
+  "author": {
+    "name": "devnik",
+    "email": "niklas.grieger@devnik.dev",
+    "url": "https://devnik.dev/"
+  },
+  "homepage": "https://github.com/devonik/nuxt-vuetify-nested-containment#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devonik/nuxt-vuetify-nested-containment.git"
+  },
+  "bugs": {
+    "url": "https://github.com/devonik/nuxt-vuetify-nested-containment/issues",
+    "email": "niklas.grieger@devnik.dev"
+  },
   "license": "MIT",
   "type": "module",
   "exports": {
