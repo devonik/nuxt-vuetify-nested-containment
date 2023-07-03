@@ -164,13 +164,17 @@ const data = [
 > With this string you can overwrite the default back title
 
 *type* string
+
 *default*: Back
 
 ###### transition-component-name
 
 > With this string you can overwrite the default transition component. See possible vuetify component names here https://vuetifyjs.com/en/styles/transitions/
 
+*Important note* If your app is using vuetify-loader to auto-import components be sure to explicit import the v-...-transition component from vuetify. ```import { VFadeTransition } from 'vuetify/components'```
+
 *type* string
+
 *default*: v-fade-transition
 
 ###### transition-component-props
@@ -178,7 +182,8 @@ const data = [
 > With this json you can overwrite the default transition props. See possible props here https://vuetifyjs.com/en/api/v-fade-transition/
 
 *type* Object
-*default*: ```js { group: true, hideOnLeave: true }```
+
+*default*: ```{ group: true, hideOnLeave: true }```
 
 ## Quick Setup
 
