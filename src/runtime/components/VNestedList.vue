@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import {ref} from '#imports'
   const props = defineProps({
+    transitionComponentName: { type: String, default: 'v-fade-transition'},
+    transitionComponentProps: { 
+      type: Object, 
+      default:  { 
+        group: true,
+        hideOnLeave: true
+      }
+    },
     data: { type: Array<Record<string, any>>, required: true}
   })
 const activeLevel = ref(0)
@@ -25,36 +33,39 @@ function clickChildItem (index){
   activeLevel.value += 1
 }
 function clickBackToParent (){
-    console.log("visibleData", visibleData.value)
-    console.log("lastParentData", lastParentData.value)
   visibleData.value = lastParentData.value
   activeLevel.value -= 1
 }
 </script>
 <template>
   <v-list>
-    <v-list-item
-      v-show="activeLevel !== 0"
-      title="back"
-      prepend-icon="mdi-arrow-left"
-      @click="clickBackToParent"
-    />
-    <v-list-item 
-      v-for="(parent, pIdx) of data"
-      v-show="activeLevel === 0"
-      :key="pIdx"
-      v-bind="parent.props"
-      :append-icon="parent.children && parent.children.length > 0 ? 'mdi-arrow-right' : null"
+    <component
+      :is="transitionComponentName"
+      v-bind="transitionComponentProps"
+    >
+      <v-list-item
+        v-show="activeLevel !== 0"
+        title="back"
+        prepend-icon="mdi-arrow-left"
+        @click="clickBackToParent"
+      />
+      <v-list-item 
+        v-for="(parent, pIdx) of data"
+        v-show="activeLevel === 0"
+        :key="pIdx"
+        v-bind="parent.props"
+        :append-icon="parent.children && parent.children.length > 0 ? 'mdi-arrow-right' : null"
       
-      @click="clickParentItem(pIdx)"
-    />
-    <v-list-item
-      v-for="(child, cIdx) of visibleData.children"
-      v-show="activeLevel !== 0"
-      :key="cIdx"
-      v-bind="child.props"
-      :append-icon="child.children && child.children.length > 0 ? 'mdi-arrow-right' : null"
-      @click="clickChildItem(cIdx)"
-    />
+        @click="clickParentItem(pIdx)"
+      />
+      <v-list-item
+        v-for="(child, cIdx) of visibleData.children"
+        v-show="activeLevel !== 0"
+        :key="cIdx"
+        v-bind="child.props"
+        :append-icon="child.children && child.children.length > 0 ? 'mdi-arrow-right' : null"
+        @click="clickChildItem(cIdx)"
+      />
+    </component>
   </v-list>
 </template>

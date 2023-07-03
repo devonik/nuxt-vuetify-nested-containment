@@ -27,7 +27,14 @@ With this component you can use a infinitly nested list. Optimized for mobile wi
 It supports all vuetify List props by forward all props in "props:" to v-list-item by v-bind="item.props". See https://vuetifyjs.com/en/api/v-list-item/ for all possible props.
 Define custom click event on each item with onClick attribute in data json (Will be overwritten with arrow if item has childrens)
 
-##### Required props
+##### Props
+
+###### data
+
+> With this json you can structure the nested list
+
+*type* Array<Record<string, any>>
+*required* true
 
 ```js
 <v-nested-list :data="data" />
@@ -151,6 +158,20 @@ const data = [
   }
 ]
 ```
+
+###### transition-component-name
+
+> With this string you can overwrite the default transition component. See possible vuetify component names here https://vuetifyjs.com/en/styles/transitions/
+
+*type* string
+*default*: v-fade-transition
+
+###### transition-component-props
+
+> With this json you can overwrite the default transition props. See possible props here https://vuetifyjs.com/en/api/v-fade-transition/
+
+*type* Object
+*default*: ```js { group: true, hideOnLeave: true }```
 
 ## Quick Setup
 

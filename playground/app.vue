@@ -1,6 +1,9 @@
 <template>
   <div style="max-width: 500px;">
-    <v-nested-list :data="data" />
+    <v-nested-list
+      :data="data"
+      transition-component-name="v-fab-transition"
+    />
   </div>
 </template>
 
