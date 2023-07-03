@@ -4,10 +4,10 @@ import {ref} from '#imports'
     transitionComponentName: { type: String, default: 'v-fade-transition'},
     transitionComponentProps: { 
       type: Object, 
-      default:  { 
+      default: () =>  ({ 
         group: true,
         hideOnLeave: true
-      }
+      })
     },
     data: { type: Array<Record<string, any>>, required: true}
   })
