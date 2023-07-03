@@ -9,6 +9,7 @@ import {ref} from '#imports'
         hideOnLeave: true
       })
     },
+    backTitle: { type: String, default: 'Back'},
     data: { type: Array<Record<string, any>>, required: true}
   })
 const activeLevel = ref(0)
@@ -45,14 +46,15 @@ function clickBackToParent (){
     >
       <v-list-item
         v-show="activeLevel !== 0"
-        title="back"
+        key="back"
+        :title="backTitle"
         prepend-icon="mdi-arrow-left"
         @click="clickBackToParent"
       />
       <v-list-item 
         v-for="(parent, pIdx) of data"
         v-show="activeLevel === 0"
-        :key="pIdx"
+        :key="'parent-' + pIdx"
         v-bind="parent.props"
         :append-icon="parent.children && parent.children.length > 0 ? 'mdi-arrow-right' : null"
       
@@ -61,7 +63,7 @@ function clickBackToParent (){
       <v-list-item
         v-for="(child, cIdx) of visibleData.children"
         v-show="activeLevel !== 0"
-        :key="cIdx"
+        :key="'child-' + cIdx"
         v-bind="child.props"
         :append-icon="child.children && child.children.length > 0 ? 'mdi-arrow-right' : null"
         @click="clickChildItem(cIdx)"

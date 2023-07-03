@@ -1,9 +1,21 @@
 <template>
   <div style="max-width: 500px;">
-    <v-nested-list
-      :data="data"
-      transition-component-name="v-fab-transition"
-    />
+    <v-bottom-sheet>
+      <template #activator="{ props }">
+        <v-btn
+          v-bind="props"
+          class="pa-0"
+        >
+          <v-icon icon="mdi-menu" />
+          Toggle
+        </v-btn>
+      </template>
+      <v-nested-list
+        :data="data"
+        transition-component-name="v-fab-transition"
+        back-title="Custom back"
+      />
+    </v-bottom-sheet>
   </div>
 </template>
 

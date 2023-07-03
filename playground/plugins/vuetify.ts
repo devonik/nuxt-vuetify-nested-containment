@@ -5,6 +5,8 @@ import { defineNuxtPlugin } from "#app";
 import { aliases, mdi } from "vuetify/iconsets/mdi";
 import "@mdi/font/css/materialdesignicons.css";
 
+import { VBottomSheet } from "vuetify/labs/VBottomSheet";
+
 const myCustomLightTheme: ThemeDefinition = {
   dark: false,
   colors: {
@@ -34,7 +36,10 @@ export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     // Vue 3 has no way to automatically detect if SSR is used. See https://next.vuetifyjs.com/en/getting-started/installation/#ssr
     ssr: true,
-    components,
+    components: {
+      ...components,
+      VBottomSheet,
+    },
     directives,
     icons: {
       defaultSet: "mdi",

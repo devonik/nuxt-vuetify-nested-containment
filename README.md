@@ -159,6 +159,13 @@ const data = [
 ]
 ```
 
+###### back-title
+
+> With this string you can overwrite the default back title
+
+*type* string
+*default*: Back
+
 ###### transition-component-name
 
 > With this string you can overwrite the default transition component. See possible vuetify component names here https://vuetifyjs.com/en/styles/transitions/
