@@ -1,15 +1,6 @@
 <script setup lang="ts">
-interface NestedListDataItem {
-  props: {
-    title: string
-    value: string
-    appedIcon?: string
-    prependIcon?: string
-  }
-  children: NestedListDataItem[],
-  onClick: Function | undefined
-}
-import {reactive, ref} from '#imports'
+import {NestedListDataItem} from '../../module'
+import {reactive, ref, navigateTo} from '#imports'
   const props = defineProps({
     transitionComponentName: { type: String, default: 'v-fade-transition'},
     transitionComponentProps: { 
@@ -19,26 +10,30 @@ import {reactive, ref} from '#imports'
         hideOnLeave: true
       })
     },
-    listProps: { type: Object},
+    listProps: { type: Object, default: undefined},
     backTitle: { type: String, default: 'Back'},
     backIcon: { type: [Object, String], default: 'mdi-arrow-left'},
     data: { type: Array<NestedListDataItem>, required: true}
   })
 const activeLevel = ref(0)
-let lastParentData = reactive(props.data)
-let visibleData = reactive(props.data)
+let lastParentData: NestedListDataItem = reactive(props.data)
+let visibleData: NestedListDataItem = reactive(props.data)
 
-function clickParentItem (index){
-  if(!props.data[index].children || props.data[index].children.length === 0){
-    if(props.data[index].onClick) props.data[index].onClick()
+function clickParentItem (index: number){
+  const item = props.data[index]
+  if(!item.children || item.children.length === 0){
+    if(item.props.to) return navigateTo(item.props.to)
+    else if(item.onClick) return item.onClick()
     return
   }
-  visibleData = props.data[index]
+  visibleData = item
   activeLevel.value = 1
 }
-function clickChildItem (index){
-  if(!visibleData.children[index].children || visibleData.children[index].children.length === 0 ){
-    if(visibleData.children[index].onClick) visibleData.children[index].onClick()
+function clickChildItem (index: number){
+  const visibleChildren = visibleData.children[index]
+  if(!visibleChildren.children || visibleChildren.children.length === 0 ){
+    if(visibleChildren.props.to) return navigateTo(visibleChildren.props.to)
+    else if(visibleChildren.onClick) return visibleChildren.onClick()
     return
   }
   lastParentData = visibleData
