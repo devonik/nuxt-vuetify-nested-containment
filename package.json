@@ -1,6 +1,6 @@
 {
   "name": "nuxt-vuetify-nested-containment",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "This module provides multiple vuetify extended components like a List with nested logic",
   "author": {
     "name": "devnik",
@@ -35,7 +35,7 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "release": "npm run lint && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch"

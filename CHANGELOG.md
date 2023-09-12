@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.1.0...v1.2.0)
+
+
+### 🚀 Enhancements
+
+  - NestedList onClick function on item will be ignored if prop to is defined ([84a842e](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/84a842e))
+
+### 🏡 Chore
+
+  - Update @nuxt/kit to 3.7.1 ([c76dcfc](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/c76dcfc))
+
+### ❤️  Contributors
+
+- Niklas Grieger <niklas.grieger@devnik.dev>
+
 ## v1.1.0
 
 [compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v0.0.4...v1.1.0)
