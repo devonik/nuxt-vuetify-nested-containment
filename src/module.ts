@@ -1,7 +1,18 @@
 import { defineNuxtModule, addComponent, createResolver } from "@nuxt/kit";
 
-// Module options TypeScript interface definition
 export interface ModuleOptions {}
+
+export interface NestedListDataItem {
+  props: {
+    title: string;
+    value: string;
+    appedIcon?: string;
+    prependIcon?: string;
+    to?: string;
+  };
+  children: NestedListDataItem[];
+  onClick: Function | undefined;
+}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
