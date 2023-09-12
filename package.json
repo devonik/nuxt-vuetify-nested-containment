@@ -54,12 +54,19 @@
     "@nuxt/module-builder": "^0.4.0",
     "@nuxt/schema": "^3.5.2",
     "@nuxt/test-utils": "^3.5.1",
-    "changelogen": "^0.5.3",
+    "changelogen": "^0.5.5",
     "eslint": "^8.42.0",
-    "nuxt": "^3.5.1",
+    "nuxt": "^3.7.1",
     "vitest": "^0.31.4",
     "sass": "^1.57.1",
     "vuetify": "3.3.6",
+    "simple-git-hooks": "^2.8.1",
     "@mdi/font": "^7.2.96"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
