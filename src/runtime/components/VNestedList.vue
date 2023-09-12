@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {NestedListDataItem} from '../../module'
+import type { NestedListDataItem } from '../../module'
 import {reactive, ref, navigateTo} from '#imports'
   const props = defineProps({
     transitionComponentName: { type: String, default: 'v-fade-transition'},
@@ -30,6 +30,7 @@ function clickParentItem (index: number){
   activeLevel.value = 1
 }
 function clickChildItem (index: number){
+  if(!visibleData.children) return
   const visibleChildren = visibleData.children[index]
   if(!visibleChildren.children || visibleChildren.children.length === 0 ){
     if(visibleChildren.props.to) return navigateTo(visibleChildren.props.to)
@@ -63,7 +64,7 @@ function clickBackToParent (){
         v-show="activeLevel === 0"
         :key="'parent-' + pIdx"
         v-bind="parent.props"
-        :append-icon="parent.children && parent.children.length > 0 ? parent.props.appendIcon || 'mdi-arrow-right' : null"
+        :append-icon="parent.children && parent.children.length > 0 ? parent.props.appendIcon || 'mdi-arrow-right' : undefined"
         @click="clickParentItem(pIdx)"
       />
       <v-list-item
@@ -71,7 +72,7 @@ function clickBackToParent (){
         v-show="activeLevel !== 0"
         :key="'child-' + cIdx"
         v-bind="child.props"
-        :append-icon="child.children && child.children.length > 0 ? child.props.appendIcon || 'mdi-arrow-right' : null"
+        :append-icon="child.children && child.children.length > 0 ? child.props.appendIcon || 'mdi-arrow-right' : undefined"
         @click="clickChildItem(cIdx)"
       />
     </component>
