@@ -10,8 +10,8 @@ export interface NestedListDataItem {
     prependIcon?: string;
     to?: string;
   };
-  children: NestedListDataItem[];
-  onClick: Function | undefined;
+  children?: NestedListDataItem[];
+  onClick?: Function | undefined;
 }
 
 export default defineNuxtModule<ModuleOptions>({
