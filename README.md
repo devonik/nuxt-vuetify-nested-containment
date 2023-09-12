@@ -37,7 +37,15 @@ Define custom click event on each item with onClick attribute in data json (Will
 *required* true
 
 ```js
-<v-nested-list :data="data" />
+import IconArrowLeft from '~icons/mdi/arrow-left'
+<v-nested-list
+  :list-props="{
+    color: 'primary',
+  }"
+  :data="item.nestedListData"
+  :back-title="$t('back')"
+  :back-icon="IconArrowLeft"
+/>
 const data = [
 {
     
@@ -167,6 +175,14 @@ const data = [
 
 *default*: Back
 
+###### back-icon
+
+> With this you can overwrite the default back icon. You can either fill it with a icon string like mdi-* (Remember to load material design icons css for that). Or you fill it with a JS Object. See https://vuetifyjs.com/en/components/icons/#semantic-svg-icons for more
+
+*type* string | Object
+
+*default*: mdi-arrow-left
+
 ###### transition-component-name
 
 > With this string you can overwrite the default transition component. See possible vuetify component names here https://vuetifyjs.com/en/styles/transitions/
@@ -184,6 +200,14 @@ const data = [
 *type* Object
 
 *default*: ```{ group: true, hideOnLeave: true }```
+
+###### list-props
+
+> This object is fowarded to the v-list component via v-bind="props". For all props you can see https://vuetifyjs.com/en/api/v-list/#props
+
+*type* Object
+
+*default*: undefined
 
 ## Quick Setup
 

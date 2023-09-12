@@ -1,5 +1,15 @@
 <script setup lang="ts">
-import {ref} from '#imports'
+interface NestedListDataItem {
+  props: {
+    title: string
+    value: string
+    appedIcon?: string
+    prependIcon?: string
+  }
+  children: NestedListDataItem[],
+  onClick: Function | undefined
+}
+import {reactive, ref} from '#imports'
   const props = defineProps({
     transitionComponentName: { type: String, default: 'v-fade-transition'},
     transitionComponentProps: { 
@@ -9,37 +19,39 @@ import {ref} from '#imports'
         hideOnLeave: true
       })
     },
+    listProps: { type: Object},
     backTitle: { type: String, default: 'Back'},
-    data: { type: Array<Record<string, any>>, required: true}
+    backIcon: { type: [Object, String], default: 'mdi-arrow-left'},
+    data: { type: Array<NestedListDataItem>, required: true}
   })
 const activeLevel = ref(0)
-const lastParentData = ref(props.data)
-const visibleData = ref(props.data)
+let lastParentData = reactive(props.data)
+let visibleData = reactive(props.data)
 
 function clickParentItem (index){
   if(!props.data[index].children || props.data[index].children.length === 0){
     if(props.data[index].onClick) props.data[index].onClick()
     return
   }
-  visibleData.value = props.data[index]
+  visibleData = props.data[index]
   activeLevel.value = 1
 }
 function clickChildItem (index){
-  if(!visibleData.value.children[index].children || visibleData.value.children[index].children.length === 0 ){
-    if(visibleData.value.children[index].onClick) visibleData.value.children[index].onClick()
+  if(!visibleData.children[index].children || visibleData.children[index].children.length === 0 ){
+    if(visibleData.children[index].onClick) visibleData.children[index].onClick()
     return
   }
-  lastParentData.value = visibleData.value
-  visibleData.value = visibleData.value.children[index]
+  lastParentData = visibleData
+  visibleData = visibleData.children[index]
   activeLevel.value += 1
 }
 function clickBackToParent (){
-  visibleData.value = lastParentData.value
+  visibleData = lastParentData
   activeLevel.value -= 1
 }
 </script>
 <template>
-  <v-list>
+  <v-list v-bind="listProps">
     <component
       :is="transitionComponentName"
       v-bind="transitionComponentProps"
@@ -48,7 +60,7 @@ function clickBackToParent (){
         v-show="activeLevel !== 0"
         key="back"
         :title="backTitle"
-        prepend-icon="mdi-arrow-left"
+        :prepend-icon="backIcon"
         @click="clickBackToParent"
       />
       <v-list-item 
@@ -56,8 +68,7 @@ function clickBackToParent (){
         v-show="activeLevel === 0"
         :key="'parent-' + pIdx"
         v-bind="parent.props"
-        :append-icon="parent.children && parent.children.length > 0 ? 'mdi-arrow-right' : null"
-      
+        :append-icon="parent.children && parent.children.length > 0 ? parent.props.appendIcon || 'mdi-arrow-right' : null"
         @click="clickParentItem(pIdx)"
       />
       <v-list-item
@@ -65,7 +76,7 @@ function clickBackToParent (){
         v-show="activeLevel !== 0"
         :key="'child-' + cIdx"
         v-bind="child.props"
-        :append-icon="child.children && child.children.length > 0 ? 'mdi-arrow-right' : null"
+        :append-icon="child.children && child.children.length > 0 ? child.props.appendIcon || 'mdi-arrow-right' : null"
         @click="clickChildItem(cIdx)"
       />
     </component>
