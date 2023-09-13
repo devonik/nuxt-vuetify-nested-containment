@@ -2,7 +2,26 @@ import { defineNuxtModule, addComponent, createResolver } from "@nuxt/kit";
 import type { VListItem } from "vuetify/components";
 export interface ModuleOptions {}
 
-type VListItemProps = VListItem["$props"];
+//Exclude not needed types cause otherwise the consumer may get Type instantiation is excessively deep and possibly infinite cause type to big
+type VListItemProps = Omit<
+  VListItem["$props"],
+  | "onClick"
+  | "onClickOnce"
+  | "$children"
+  | "onVnodeBeforeMount"
+  | "onVnodeMounted"
+  | "onVnodeBeforeUpdate"
+  | "onVnodeUpdated"
+  | "onVnodeBeforeUnmount"
+  | "onVnodeUnmounted"
+  | "v-slot:default"
+  | "v-slots"
+  | "v-slot:title"
+  | "v-slot:append"
+  | "v-slot:prepend"
+  | "v-slot:subtitle"
+>;
+
 export interface NestedListDataItem {
   props: VListItemProps;
   children?: NestedListDataItem[];
