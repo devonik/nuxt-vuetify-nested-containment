@@ -1,15 +1,10 @@
 import { defineNuxtModule, addComponent, createResolver } from "@nuxt/kit";
-
+import type { VListItem } from "vuetify/components";
 export interface ModuleOptions {}
 
+type VListItemProps = VListItem["$props"];
 export interface NestedListDataItem {
-  props: {
-    title: string;
-    value: string;
-    appedIcon?: string;
-    prependIcon?: string;
-    to?: string;
-  };
+  props: VListItemProps;
   children?: NestedListDataItem[];
   onClick?: Function | undefined;
 }
