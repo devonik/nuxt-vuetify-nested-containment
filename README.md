@@ -23,6 +23,8 @@ This module provides multiple vuetify extended components like a List with neste
 
 #### VNestedList
 
+![Preview](docs/assets/v-nested-list.gif)
+
 With this component you can use a infinitly nested list. Optimized for mobile with one visible level and 'go back' functionality.
 It supports all vuetify List props by forward all props in "props:" to v-list-item by v-bind="item.props". See https://vuetifyjs.com/en/api/v-list-item/ for all possible props.
 Define custom click event on each item with onClick attribute in data json (Will be overwritten with arrow if item has childrens)
