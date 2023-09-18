@@ -1,42 +1,56 @@
 <script setup lang="ts">
 import type { NestedListDataItem } from '../../module'
 import {reactive, ref, navigateTo} from '#imports'
-  const props = defineProps({
-    transitionComponentName: { type: String, default: 'v-fade-transition'},
-    transitionComponentProps: { 
-      type: Object, 
-      default: () =>  ({ 
-        group: true,
-        hideOnLeave: true
-      })
-    },
-    listProps: { type: Object, default: undefined},
-    backTitle: { type: String, default: 'Back'},
-    backIcon: { type: [Object, String], default: 'mdi-arrow-left'},
-    data: { type: Array<NestedListDataItem>, required: true}
-  })
+
+const props = defineProps({
+  transitionComponentName: { type: String, default: 'v-fade-transition'},
+  transitionComponentProps: { 
+    type: Object, 
+    default: () =>  ({ 
+      group: true,
+      hideOnLeave: true
+    })
+  },
+  listProps: { type: Object, default: undefined},
+  backTitle: { type: String, default: 'Back'},
+  backIcon: { type: [Object, String], default: 'mdi-arrow-left'},
+  data: { type: Array<NestedListDataItem>, required: true}
+})
+
+const emit = defineEmits<{
+  onClickLastChild: []
+}>()
+
 const activeLevel = ref(0)
 let lastParentData: NestedListDataItem = reactive(props.data)
 let visibleData: NestedListDataItem = reactive(props.data)
 
 function clickParentItem (index: number){
   const item = props.data[index]
-  if(!item.children || item.children.length === 0){
-    if(item.props.to) return navigateTo(item.props.to)
-    else if(item.onClick) return item.onClick()
-    return
-  }
+
+  //If the items is the latests child in this level emit event
+  if(!item.children || item.children.length === 0) emit('onClickLastChild')
+
+  if(item.props.to) return navigateTo(item.props.to)
+  else if(item.onClick) return item.onClick()
+
+  //Only proceed paging if there are childrens
+  if(!item.children || item.children.length === 0) return
   visibleData = item
   activeLevel.value = 1
 }
 function clickChildItem (index: number){
   if(!visibleData.children) return
   const visibleChildren = visibleData.children[index]
-  if(!visibleChildren.children || visibleChildren.children.length === 0 ){
-    if(visibleChildren.props.to) return navigateTo(visibleChildren.props.to)
+
+  //If the items is the latests child in this level emit event
+  if(!visibleChildren.children || visibleChildren.children.length === 0) emit('onClickLastChild')
+
+  if(visibleChildren.props.to) return navigateTo(visibleChildren.props.to)
     else if(visibleChildren.onClick) return visibleChildren.onClick()
-    return
-  }
+
+    //Only proceed paging if there are childrens
+  if(!visibleChildren.children || visibleChildren.children.length === 0 ) return
   lastParentData = visibleData
   visibleData = visibleData.children[index]
   activeLevel.value += 1
