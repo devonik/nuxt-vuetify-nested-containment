@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.2.4...v1.3.0)
+
+### 🚀 Enhancements
+
+- V-list emit event onClickLastChild so consumer can react on last child click like closing a menu ([711d7f1](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/711d7f1))
+
+### 📖 Documentation
+
+- Add v-nested-list preview gif ([91e2027](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/91e2027))
+
+### ❤️ Contributors
+
+- Niklas Grieger <niklas.grieger@devnik.dev>
+
 ## v1.2.4
 
 [compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.2.3...v1.2.4)
