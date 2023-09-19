@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { NestedListDataItem } from '../../module'
-import {reactive, ref, navigateTo} from '#imports'
+import {reactive, ref, navigateTo, useRoute} from '#imports'
 
 const props = defineProps({
   transitionComponentName: { type: String, default: 'v-fade-transition'},
