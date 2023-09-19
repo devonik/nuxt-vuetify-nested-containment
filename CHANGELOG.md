@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.5.1
+
+[compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.5.0...v1.5.1)
+
+### 🩹 Fixes
+
+- VNestedList make vue render key unique ([42d3229](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/42d3229))
+
+### ❤️ Contributors
+
+- Niklas Grieger <niklas.grieger@devnik.dev>
+
 ## v1.5.0
 
 [compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.4.1...v1.5.0)
