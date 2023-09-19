@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v1.5.0
+
+[compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.4.1...v1.5.0)
+
 ## v1.4.1
 
 [compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.4.0...v1.4.1)
