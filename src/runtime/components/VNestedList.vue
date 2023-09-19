@@ -29,8 +29,8 @@ const emit = defineEmits<{
 
 const route = useRoute()
 const activeLevel = ref(0)
-let lastParentData = reactive<Record<string, any>>({})
-let visibleData = reactive<Record<string, any>>({})
+let lastParentData = ref<Record<string, any>>({})
+let visibleData = ref<Record<string, any>>({})
 
 function clickParentItem (index: number){
   const item = props.data[index]
@@ -38,33 +38,31 @@ function clickParentItem (index: number){
   //If the items is the latests child in this level emit event
   if(!item.children || item.children.length === 0) emit('onClickLastChild')
 
-  if(item.props.to) return navigateTo(item.props.to)
-  else if(item.onClick) return item.onClick()
+  if(item.onClick) return item.onClick()
 
   //Only proceed paging if there are childrens
   if(!item.children || item.children.length === 0) return
 
   
-  visibleData = item
+  visibleData.value = item
   lastParentData = visibleData
   activeLevel.value = 1
 
 }
 function clickChildItem (index: number){
-  if(!visibleData.children) return
-  const visibleChildren = visibleData.children[index]
+  if(!visibleData.value.children) return
+  const visibleChildren = visibleData.value.children[index]
 
   //If the items is the latests child in this level emit event
   if(!visibleChildren.children || visibleChildren.children.length === 0) emit('onClickLastChild')
 
-  if(visibleChildren.props.to) return navigateTo(visibleChildren.props.to)
-    else if(visibleChildren.onClick) return visibleChildren.onClick()
+  if(visibleChildren.onClick) return visibleChildren.onClick()
 
-    //Only proceed paging if there are childrens
+   //Only proceed paging if there are childrens
   if(!visibleChildren.children || visibleChildren.children.length === 0 ) return
 
   lastParentData = visibleData
-  visibleData = visibleData.children[index]
+  visibleData = visibleData.value.children[index]
   activeLevel.value += 1
 
 }
@@ -98,7 +96,7 @@ function clickBackToParent (){
       <v-list-item 
         v-for="(parent, pIdx) of data"
         v-show="activeLevel === 0"
-        :key="'parent-' + pIdx"
+        :key="'parent-' + parent.props.value"
         v-bind="parent.props"
         :active="parent.activeQueryParam && route.query[parent.activeQueryParam] ? route.query[parent.activeQueryParam] === parent.props.value : false"
         :append-icon="parent.children && parent.children.length > 0 ? parent.props.appendIcon || 'mdi-arrow-right' : undefined"
@@ -107,7 +105,7 @@ function clickBackToParent (){
       <v-list-item
         v-for="(child, cIdx) of visibleData.children"
         v-show="activeLevel !== 0"
-        :key="'child-' + cIdx"
+        :key="'child-' + child.props.value"
         v-bind="child.props"
         :active="child.activeQueryParam && route.query[child.activeQueryParam] ? route.query[child.activeQueryParam]?.includes(child.props.value) : false"
         :append-icon="child.children && child.children.length > 0 ? child.props.appendIcon || 'mdi-arrow-right' : undefined"
