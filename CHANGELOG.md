@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.0
+
+[compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.3.0...v1.4.0)
+
+### 🚀 Enhancements
+
+- VNestedList add activeQueryParam listItem type to enable active route query sync ([3fdde06](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/3fdde06))
+
+### ❤️ Contributors
+
+- Niklas Grieger <niklas.grieger@devnik.dev>
+
 ## v1.3.0
 
 [compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.2.4...v1.3.0)
