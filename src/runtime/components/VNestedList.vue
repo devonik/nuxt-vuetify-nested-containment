@@ -1,20 +1,26 @@
 <script setup lang="ts">
-import type { NestedListDataItem } from '../../module'
+import type { NestedListDataItem , VListItemPropsLight} from '../../module'
 import {reactive, ref, navigateTo, useRoute} from '#imports'
 
-const props = defineProps({
-  transitionComponentName: { type: String, default: 'v-fade-transition'},
-  transitionComponentProps: { 
-    type: Object, 
-    default: () =>  ({ 
+interface Props {
+  transitionComponentName?: string
+  transitionComponentProps?: Object,
+  listProps?: VListItemPropsLight
+  backItemProps?: VListItemPropsLight
+  data: NestedListDataItem[]
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  transitionComponentName: 'v-fade-transition',
+  transitionComponentProps: () =>  ({ 
       group: true,
       hideOnLeave: true
-    })
-  },
-  listProps: { type: Object, default: undefined},
-  backTitle: { type: String, default: 'Back'},
-  backIcon: { type: [Object, String], default: 'mdi-arrow-left'},
-  data: { type: Array<NestedListDataItem>, required: true},
+    }),
+    listProps: undefined,
+    backItemProps: {
+      title: 'Back',
+      prependIcon: 'mdi-arrow-left'
+    }
 })
 
 const emit = defineEmits<{
@@ -23,8 +29,8 @@ const emit = defineEmits<{
 
 const route = useRoute()
 const activeLevel = ref(0)
-let lastParentData: NestedListDataItem = reactive(props.data)
-let visibleData: NestedListDataItem = reactive(props.data)
+let lastParentData = reactive<Record<string, any>>({})
+let visibleData = reactive<Record<string, any>>({})
 
 function clickParentItem (index: number){
   const item = props.data[index]
@@ -80,16 +86,21 @@ function clickBackToParent (){
       <v-list-item
         v-show="activeLevel !== 0"
         key="back"
-        :title="backTitle"
-        :prepend-icon="backIcon"
+        v-bind="backItemProps"
         @click="clickBackToParent"
-      />
+      >
+        <template #prepend>
+          <div class="mr-4">
+            <v-icon :icon="backItemProps.prependIcon" />
+          </div>
+        </template>
+      </v-list-item>
       <v-list-item 
         v-for="(parent, pIdx) of data"
         v-show="activeLevel === 0"
         :key="'parent-' + pIdx"
         v-bind="parent.props"
-        :active="parent.activeQueryParam ? route.query[parent.activeQueryParam] === parent.props.value : false"
+        :active="parent.activeQueryParam && route.query[parent.activeQueryParam] ? route.query[parent.activeQueryParam] === parent.props.value : false"
         :append-icon="parent.children && parent.children.length > 0 ? parent.props.appendIcon || 'mdi-arrow-right' : undefined"
         @click="clickParentItem(pIdx)"
       />
@@ -98,7 +109,7 @@ function clickBackToParent (){
         v-show="activeLevel !== 0"
         :key="'child-' + cIdx"
         v-bind="child.props"
-        :active="child.activeQueryParam ? route.query[child.activeQueryParam].includes(child.props.value) : false"
+        :active="child.activeQueryParam && route.query[child.activeQueryParam] ? route.query[child.activeQueryParam]?.includes(child.props.value) : false"
         :append-icon="child.children && child.children.length > 0 ? child.props.appendIcon || 'mdi-arrow-right' : undefined"
         @click="clickChildItem(cIdx)"
       />

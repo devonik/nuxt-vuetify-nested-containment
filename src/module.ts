@@ -3,7 +3,7 @@ import type { VListItem } from "vuetify/components";
 export interface ModuleOptions {}
 
 //Exclude not needed types cause otherwise the consumer may get Type instantiation is excessively deep and possibly infinite cause type to big
-type VListItemProps = Omit<
+export type VListItemPropsLight = Omit<
   VListItem["$props"],
   | "onClick"
   | "onClickOnce"
@@ -23,7 +23,7 @@ type VListItemProps = Omit<
 >;
 
 export interface NestedListDataItem {
-  props: VListItemProps;
+  props: VListItemPropsLight;
   activeQueryParam: string;
   children?: NestedListDataItem[];
   onClick?: Function | undefined;
