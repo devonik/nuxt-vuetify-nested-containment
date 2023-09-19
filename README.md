@@ -36,19 +36,28 @@ Define custom click event on each item with onClick attribute in data json (Will
 > With this json you can structure the nested list
 
 *type* Array<Record<string, any>>
+
 *required* true
 
-See the ![type](https://github.com/devonik/nuxt-vuetify-nested-containment/blob/main/src/module.ts) (25)
+See the [type](https://github.com/devonik/nuxt-vuetify-nested-containment/blob/main/src/module.ts) (25)
 
 ```js
 import IconArrowLeft from '~icons/mdi/arrow-left'
 <v-nested-list
+  /* VList props https://vuetifyjs.com/en/api/v-list/#props */
   :list-props="{
     color: 'primary',
   }"
+  /* The below for structure */
   :data="item.nestedListData"
-  :back-title="$t('back')"
-  :back-icon="IconArrowLeft"
+  /* VListItem props https://vuetifyjs.com/en/api/v-list-item/#props */
+  :back-item-props="{
+    title: $t('back'),
+    baseColor: 'any-theme-color',
+    prependIcon: 'custom:chevron-left'
+  }"
+  /* Emmitted event if any last child is clicked - usefull for closing menu as example */
+  @on-click-last-child="closeMenu()"
 />
 const data = [
 {
