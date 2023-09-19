@@ -14,13 +14,14 @@ const props = defineProps({
   listProps: { type: Object, default: undefined},
   backTitle: { type: String, default: 'Back'},
   backIcon: { type: [Object, String], default: 'mdi-arrow-left'},
-  data: { type: Array<NestedListDataItem>, required: true}
+  data: { type: Array<NestedListDataItem>, required: true},
 })
 
 const emit = defineEmits<{
   onClickLastChild: []
 }>()
 
+const route = useRoute()
 const activeLevel = ref(0)
 let lastParentData: NestedListDataItem = reactive(props.data)
 let visibleData: NestedListDataItem = reactive(props.data)
@@ -36,8 +37,12 @@ function clickParentItem (index: number){
 
   //Only proceed paging if there are childrens
   if(!item.children || item.children.length === 0) return
+
+  
   visibleData = item
+  lastParentData = visibleData
   activeLevel.value = 1
+
 }
 function clickChildItem (index: number){
   if(!visibleData.children) return
@@ -51,17 +56,23 @@ function clickChildItem (index: number){
 
     //Only proceed paging if there are childrens
   if(!visibleChildren.children || visibleChildren.children.length === 0 ) return
+
   lastParentData = visibleData
   visibleData = visibleData.children[index]
   activeLevel.value += 1
+
 }
 function clickBackToParent (){
   visibleData = lastParentData
   activeLevel.value -= 1
 }
+
+
 </script>
 <template>
-  <v-list v-bind="listProps">
+  <v-list
+    v-bind="listProps"
+  >
     <component
       :is="transitionComponentName"
       v-bind="transitionComponentProps"
@@ -78,6 +89,7 @@ function clickBackToParent (){
         v-show="activeLevel === 0"
         :key="'parent-' + pIdx"
         v-bind="parent.props"
+        :active="parent.activeQueryParam ? route.query[parent.activeQueryParam] === parent.props.value : false"
         :append-icon="parent.children && parent.children.length > 0 ? parent.props.appendIcon || 'mdi-arrow-right' : undefined"
         @click="clickParentItem(pIdx)"
       />
@@ -86,6 +98,7 @@ function clickBackToParent (){
         v-show="activeLevel !== 0"
         :key="'child-' + cIdx"
         v-bind="child.props"
+        :active="child.activeQueryParam ? route.query[child.activeQueryParam].includes(child.props.value) : false"
         :append-icon="child.children && child.children.length > 0 ? child.props.appendIcon || 'mdi-arrow-right' : undefined"
         @click="clickChildItem(cIdx)"
       />

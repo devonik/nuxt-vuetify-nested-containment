@@ -24,6 +24,7 @@ type VListItemProps = Omit<
 
 export interface NestedListDataItem {
   props: VListItemProps;
+  activeQueryParam: string;
   children?: NestedListDataItem[];
   onClick?: Function | undefined;
 }

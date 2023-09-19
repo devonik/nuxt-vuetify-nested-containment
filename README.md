@@ -38,6 +38,8 @@ Define custom click event on each item with onClick attribute in data json (Will
 *type* Array<Record<string, any>>
 *required* true
 
+See the ![type](https://github.com/devonik/nuxt-vuetify-nested-containment/blob/main/src/module.ts) (25)
+
 ```js
 import IconArrowLeft from '~icons/mdi/arrow-left'
 <v-nested-list
@@ -50,7 +52,7 @@ import IconArrowLeft from '~icons/mdi/arrow-left'
 />
 const data = [
 {
-    
+    activeQueryParam: 'q', // You can use this to let the component set active true when the vue route query is equal to props.value
     props: {
       title: 'Level 0 - Item1',
       prependIcon: 'mdi-account',
