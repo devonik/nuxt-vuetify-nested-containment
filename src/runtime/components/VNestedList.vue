@@ -50,7 +50,7 @@ function clickParentItem (index: number){
 
 }
 function clickChildItem (index: number){
-  if(!visibleData.value.children) return
+  if(!visibleData.value) return emit('onClickLastChild')
   const visibleChildren = visibleData.value.children[index]
 
   //If the items is the latests child in this level emit event
