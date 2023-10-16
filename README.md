@@ -7,7 +7,6 @@
 
 This module provides multiple vuetify extended components like a List with nested logic
 
-
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
 <!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/nuxt-vuetify-nested-containment?file=playground%2Fapp.vue) -->
 <!-- - [📖 &nbsp;Documentation](https://example.com) -->
@@ -26,7 +25,7 @@ This module provides multiple vuetify extended components like a List with neste
 ![Preview](docs/assets/v-nested-list.gif)
 
 With this component you can use a infinitly nested list. Optimized for mobile with one visible level and 'go back' functionality.
-It supports all vuetify List props by forward all props in "props:" to v-list-item by v-bind="item.props". See https://vuetifyjs.com/en/api/v-list-item/ for all possible props.
+It supports all vuetify List props by forward all props in "props:" to v-list-item by v-bind="item.props". See <https://vuetifyjs.com/en/api/v-list-item/> for all possible props.
 Define custom click event on each item with onClick attribute in data json (Will be overwritten with arrow if item has childrens)
 
 ##### Props
@@ -190,7 +189,7 @@ const data = [
 
 ###### back-icon
 
-> With this you can overwrite the default back icon. You can either fill it with a icon string like mdi-* (Remember to load material design icons css for that). Or you fill it with a JS Object. See https://vuetifyjs.com/en/components/icons/#semantic-svg-icons for more
+> With this you can overwrite the default back icon. You can either fill it with a icon string like mdi-* (Remember to load material design icons css for that). Or you fill it with a JS Object. See <https://vuetifyjs.com/en/components/icons/#semantic-svg-icons> for more
 
 *type* string | Object
 
@@ -198,7 +197,7 @@ const data = [
 
 ###### transition-component-name
 
-> With this string you can overwrite the default transition component. See possible vuetify component names here https://vuetifyjs.com/en/styles/transitions/
+> With this string you can overwrite the default transition component. See possible vuetify component names here <https://vuetifyjs.com/en/styles/transitions/>
 
 *Important note* If your app is using vuetify-loader to auto-import components be sure to explicit import the v-...-transition component from vuetify. ```import { VFadeTransition } from 'vuetify/components'```
 
@@ -208,7 +207,7 @@ const data = [
 
 ###### transition-component-props
 
-> With this json you can overwrite the default transition props. See possible props here https://vuetifyjs.com/en/api/v-fade-transition/
+> With this json you can overwrite the default transition props. See possible props here <https://vuetifyjs.com/en/api/v-fade-transition/>
 
 *type* Object
 
@@ -216,7 +215,7 @@ const data = [
 
 ###### list-props
 
-> This object is fowarded to the v-list component via v-bind="props". For all props you can see https://vuetifyjs.com/en/api/v-list/#props
+> This object is fowarded to the v-list component via v-bind="props". For all props you can see <https://vuetifyjs.com/en/api/v-list/#props>
 
 *type* Object
 
