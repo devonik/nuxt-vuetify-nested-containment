@@ -20,13 +20,14 @@ export type VListItemPropsLight = Omit<
   | "v-slot:append"
   | "v-slot:prepend"
   | "v-slot:subtitle"
+  | "style"
 >;
 
 export interface NestedListDataItem {
   props: VListItemPropsLight;
   activeQueryParam: string;
   children?: NestedListDataItem[];
-  onClick?: Function | undefined;
+  onClick?: () => void | undefined;
 }
 
 export default defineNuxtModule<ModuleOptions>({
