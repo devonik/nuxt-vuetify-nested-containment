@@ -1,7 +1,7 @@
 {
   "name": "nuxt-vuetify-nested-containment",
   "type": "module",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "This module provides multiple vuetify extended components like a List with nested logic",
   "author": {
     "name": "devnik",

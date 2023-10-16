@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.6.0
+
+[compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.5.2...v1.6.0)
+
+### 🌊 Types
+
+- Remove style from exposed type NestedListDataItem cause it blows the type size up and occurs typeerror "can be infinite" ([1e431a8](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/1e431a8))
+
+### 🏡 Chore
+
+- Update libraries to latest, using latest eslint config from @antfu ([ee37ef6](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/ee37ef6))
+
+### ❤️ Contributors
+
+- Niklas Grieger <niklas.grieger@devnik.dev>
+
 ## v1.5.4
 
 [compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.5.2...v1.5.4)
