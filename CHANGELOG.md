@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.6.1
+
+[compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.6.0...v1.6.1)
+
+### 🩹 Fixes
+
+- Set .value instead of ref directly ([a36d8ef](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/a36d8ef))
+
+### ❤️ Contributors
+
+- Niklas Grieger <niklas.grieger@devnik.dev>
+
 ## v1.6.0
 
 [compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.5.2...v1.6.0)
