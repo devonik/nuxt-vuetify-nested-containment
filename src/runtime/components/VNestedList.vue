@@ -30,8 +30,8 @@ const emit = defineEmits<{
 
 const route = useRoute()
 const activeLevel = ref(0)
-let lastParentData = ref<Record<string, any>>({})
-let visibleData = ref<Record<string, any>>({})
+const lastParentData = ref<Record<string, any>>({})
+const visibleData = ref<Record<string, any>>({})
 
 function clickParentItem(index: number) {
   const item = props.data[index]
@@ -48,7 +48,7 @@ function clickParentItem(index: number) {
     return
 
   visibleData.value = item
-  lastParentData = visibleData
+  lastParentData.value = visibleData
   activeLevel.value = 1
 }
 function clickChildItem(index: number) {
@@ -67,12 +67,12 @@ function clickChildItem(index: number) {
   if (!visibleChildren.children || visibleChildren.children.length === 0)
     return
 
-  lastParentData = visibleData
-  visibleData = visibleData.value.children[index]
+  lastParentData.value = visibleData
+  visibleData.value = visibleData.value.children[index]
   activeLevel.value += 1
 }
 function clickBackToParent() {
-  visibleData = lastParentData
+  visibleData.value = lastParentData
   activeLevel.value -= 1
 }
 </script>
