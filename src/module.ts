@@ -26,7 +26,7 @@ export type VListItemPropsLight = Omit<
 
 export interface NestedListDataItem {
   props: VListItemPropsLight
-  activeQueryParam: string
+  activeQueryParam?: string
   children?: NestedListDataItem[]
   onClick?: () => void | undefined
 }
