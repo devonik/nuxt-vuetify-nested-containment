@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.6.2
+
+[compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.6.1...v1.6.2)
+
+### 🌊 Types
+
+- NestedListDataItem make activeQueryParam optional ([7e51f76](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/7e51f76))
+
+### 🏡 Chore
+
+- **release:** V1.6.1 ([18073e1](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/18073e1))
+
+### ❤️ Contributors
+
+- Niklas Grieger <niklas.grieger@devnik.dev>
+
 ## v1.6.1
 
 [compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.6.0...v1.6.1)
