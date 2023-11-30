@@ -48,7 +48,7 @@ function clickParentItem(index: number) {
     return
 
   visibleData.value = item
-  lastParentData.value = visibleData
+  lastParentData.value = visibleData.value
   activeLevel.value = 1
 }
 function clickChildItem(index: number) {
@@ -67,12 +67,12 @@ function clickChildItem(index: number) {
   if (!visibleChildren.children || visibleChildren.children.length === 0)
     return
 
-  lastParentData.value = visibleData
+  lastParentData.value = visibleData.value
   visibleData.value = visibleData.value.children[index]
   activeLevel.value += 1
 }
 function clickBackToParent() {
-  visibleData.value = lastParentData
+  visibleData.value = lastParentData.value
   activeLevel.value -= 1
 }
 function isItemActive(item: NestedListDataItem) {
