@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.6.4
+
+[compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.6.3...v1.6.4)
+
+### 🩹 Fixes
+
+- Logic bug on back in child second level occurs cause ref value was assigned to ref object ([277da22](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/277da22))
+
+### ❤️ Contributors
+
+- Niklas Grieger <niklas.grieger@devnik.dev>
+
 ## v1.6.3
 
 [compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.6.2...v1.6.3)
