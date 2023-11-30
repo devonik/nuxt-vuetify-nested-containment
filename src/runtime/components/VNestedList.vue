@@ -75,6 +75,18 @@ function clickBackToParent() {
   visibleData.value = lastParentData
   activeLevel.value -= 1
 }
+function isItemActive(item: NestedListDataItem) {
+  if (item.activeQueryParam && route.query[item.activeQueryParam]) {
+    if (Array.isArray(route.query[item.activeQueryParam]))
+      return route.query[item.activeQueryParam]?.includes(item.props.value)
+    return route.query[item.activeQueryParam] === item.props.value
+  }
+  else if (typeof item.isActive === 'function') {
+    return item.isActive()
+  }
+
+  return false
+}
 </script>
 
 <template>
@@ -102,7 +114,7 @@ function clickBackToParent() {
         v-show="activeLevel === 0"
         :key="`parent-${parent.props.value}`"
         v-bind="parent.props"
-        :active="parent.activeQueryParam && route.query[parent.activeQueryParam] ? route.query[parent.activeQueryParam] === parent.props.value : false"
+        :active="isItemActive(parent)"
         :append-icon="parent.children && parent.children.length > 0 ? parent.props.appendIcon || 'mdi-arrow-right' : undefined"
         @click="clickParentItem(pIdx)"
       />
@@ -111,7 +123,7 @@ function clickBackToParent() {
         v-show="activeLevel !== 0"
         :key="`child-${child.props.value}`"
         v-bind="child.props"
-        :active="child.activeQueryParam && route.query[child.activeQueryParam] ? route.query[child.activeQueryParam]?.includes(child.props.value) : false"
+        :active="isItemActive(child)"
         :append-icon="child.children && child.children.length > 0 ? child.props.appendIcon || 'mdi-arrow-right' : undefined"
         @click="clickChildItem(cIdx)"
       />

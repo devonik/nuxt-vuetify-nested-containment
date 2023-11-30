@@ -28,6 +28,8 @@ export interface NestedListDataItem {
   props: VListItemPropsLight
   activeQueryParam?: string
   children?: NestedListDataItem[]
+  // With this you can control the active state with a callback
+  isActive?: () => boolean
   onClick?: () => void | undefined
 }
 

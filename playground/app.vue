@@ -1,4 +1,5 @@
 <script setup>
+let count = 0
 const data = [
   {
 
@@ -6,7 +7,13 @@ const data = [
       title: 'Level 0 - Item1',
       prependIcon: 'mdi-account',
     },
-    onClick: () => { console.warn('onClick item with no childs') },
+    isActive: () => {
+      return count === 1
+    },
+    onClick: () => {
+      count = 1
+      console.warn('onClick item with no childs')
+    },
     children: [],
   },
   {
