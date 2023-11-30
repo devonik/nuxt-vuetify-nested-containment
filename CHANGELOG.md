@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.6.3
+
+[compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.6.2...v1.6.3)
+
+### 🚀 Enhancements
+
+- VNestedList add isActive() so you can now add a callback in item.isActive() => boolean to controlle the active state with a callback ([d0182a0](https://github.com/devonik/nuxt-vuetify-nested-containment/commit/d0182a0))
+
+### ❤️ Contributors
+
+- Niklas Grieger <niklas.grieger@devnik.dev>
+
 ## v1.6.2
 
 [compare changes](https://github.com/devonik/nuxt-vuetify-nested-containment/compare/v1.6.1...v1.6.2)
